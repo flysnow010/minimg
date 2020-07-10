@@ -1,0 +1,3 @@
+sub-proj  ;
+C++FLAGS += -std=c++11 -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=8 ;
+simple-lib ;

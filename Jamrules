@@ -1,0 +1,40 @@
+## common part
+ECHO "Build variant: $(variant-symbol)$(variant-description)" ;
+
+
+OUT = $(TOP)$(SLASH)bin ;
+TMP = $(OUT)$(SLASH)obj ;
+if $(variant-symbol)
+{
+    OUT = $(OUT).$(variant-symbol) ;
+    TMP = $(TMP).$(variant-symbol) ;
+}
+
+# search paths of headers and libraries:
+HDRS = $(TOP)$(SLASH)include  $(TOP)$(SLASH)src ;
+LIBS = $(TOP)$(SLASH)lib $(OUT) ;
+# resulting files:
+LOCATE_EXECUTABLE = $(OUT) ;
+LOCATE_LIBRARY =    $(OUT) -tall ;
+
+rule sub-proj-setup ( projname ? : path * )
+{
+    if $(projname) {
+        LOCATE_TARGET = $(TMP)$(SLASH)$(projname) ;
+    } else {
+        LOCATE_TARGET = $(TMP) ;
+    }
+}
+
+#using GCC ;
+CCFLAGS = -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -U__STRICT_ANSI__ ;
+CCFLAGS += -std=c99 -fno-common -fomit-frame-pointer -g -Wdeclaration-after-statement ;
+CCFLAGS += -Wall -Wno-parentheses -Wno-switch -Wno-format-zero-length ;
+CCFLAGS += -Wdisabled-optimization -Wpointer-arith -Wredundant-decls ;
+CCFLAGS += -Wno-pointer-sign -Wwrite-strings -Wtype-limits -Wundef ;
+CCFLAGS += -Wmissing-prototypes -Wno-pointer-to-int-cast -Wstrict-prototypes ;
+CCFLAGS += -O3 -fno-math-errno -fno-signed-zeros -fno-tree-vectorize ;
+#CCFLAGS += -Werror=implicit-function-declaration  ;
+LINKFLAGS = -Wl,--as-needed -Wl,--warn-common -static-libgcc ;
+
+## EOF

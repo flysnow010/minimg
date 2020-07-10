@@ -1,0 +1,4 @@
+sub-proj ;
+sub-inc src ;
+sub-inc minimg ;
+

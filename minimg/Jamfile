@@ -1,0 +1,9 @@
+sub-proj  ;
+C++FLAGS += -std=c++11 ;
+sub-link-libs -lltdl -ldl -lrt -lpthread ;
+simple-exe :
+    HttpFileServer HttpAction
+    libboost_filesystem 
+    libevhtp libevent libevent_openssl libssl libcrypto 
+    libMagick++  libMagickWand libMagickCore
+    libpng libz libtiff libjpeg libxml2 libgvc libcgraph libcdt libpathplan ;
